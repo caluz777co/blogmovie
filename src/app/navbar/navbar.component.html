@@ -1,0 +1,74 @@
+<div class="row bg-dark">
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 align-self-center text-center">
+    <img src="../../assets/icons/cine.svg" alt="iconPage" width="50" height="50">
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10 align-self-center text-center">
+    <p class="p-0 h1" style="font-family:Berkah;">Curiosity Movie</p>
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 align-self-center text-center">
+    <button class="btn">
+      <i class="fa fa-film" aria-hidden="true"></i>
+      <span class="badge badge-danger">0</span>
+    </button>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10 align-self-center text-center">
+    <button type="button" class="btn btn-outline-light border-0 mt-2 mb-2" (click)="openLogIn(contentLogIn)">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>
+      Iniciar Sesión
+    </button>
+  </div>
+
+</div>
+
+<!--Log in-->
+<ng-template #contentLogIn let-modal>
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title text-light align-self-center text-center" id="modal-basic-title">Iniciar Sesión</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="userPassword"></label>
+      <input type="text"
+        class="form-control" name="userPassword" id="userPassword" placeholder="Correo">
+      <label for="userPassword"></label>
+      <input type="password"
+          class="form-control" name="userPassword" id="userPassword" placeholder="Contraseña">
+    </div>
+  </div>
+  <div class="modal-footer align-self-center">
+    <button type="button" class="btn btn-primary" (click)="openSignIn(contentSignUp)">Registrarme</button>
+    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Iniciar Sesión</button>
+  </div>
+</ng-template>
+
+<!--Sign Up-->
+<ng-template #contentSignUp let-modal>
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title text-light align-self-center text-center" id="modal-basic-title">Registrarme</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="userName"></label>
+      <input type="text"
+        class="form-control" name="userName" id="userName" placeholder="Nombres">
+      <label for="userPassword"></label>
+      <input type="text"
+        class="form-control" name="userPassword" id="userPassword" placeholder="Correo">
+      <label for="userPassword"></label>
+      <input type="password"
+          class="form-control" name="userPassword" id="userPassword" placeholder="Contraseña">
+      <label for="userPasswordConfirmation"></label>
+      <input type="password"
+          class="form-control" name="userPasswordConfirmation" id="userPasswordConfirmation" placeholder="Confirmar contraseña">
+    </div>
+  </div>
+  <div class="modal-footer align-self-center">
+    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Registrarme</button>
+  </div>
+</ng-template>
