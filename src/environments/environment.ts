@@ -8,7 +8,9 @@ export const environment = {
 
   //GET
   categorias: "/categorias",
-  peliculas: "/peliculas"
+  peliculas: "/peliculas",
+  registro: "/register",
+  login: "/login"
 
 };
 

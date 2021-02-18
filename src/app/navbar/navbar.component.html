@@ -29,19 +29,27 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="form-group">
-      <label for="userPassword"></label>
-      <input type="text"
-        class="form-control" name="userPassword" id="userPassword" placeholder="Correo">
-      <label for="userPassword"></label>
-      <input type="password"
-          class="form-control" name="userPassword" id="userPassword" placeholder="Contraseña">
-    </div>
+    <form [formGroup]="sesionForm">
+      <div class="form-group">
+        <input type="text"
+          class="form-control"
+          placeholder="Correo"
+          formControlName="email">
+        <input type="password"
+          class="form-control"
+          placeholder="Contraseña"
+          formControlName="password">
+      </div>
+      <button type="button" class="btn btn-primary" (click)="openSignIn(contentSignUp)">Registrarme</button>
+      <button type="submit"
+        class="btn btn-success"
+        (click)="modal.close('Save click')"
+        (click)="iniciarSesion()">
+        Iniciar Sesión
+      </button>
+    </form>
   </div>
-  <div class="modal-footer align-self-center">
-    <button type="button" class="btn btn-primary" (click)="openSignIn(contentSignUp)">Registrarme</button>
-    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Iniciar Sesión</button>
-  </div>
+
 </ng-template>
 
 <!--Sign Up-->
@@ -53,22 +61,39 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="form-group">
-      <label for="userName"></label>
-      <input type="text"
-        class="form-control" name="userName" id="userName" placeholder="Nombres">
-      <label for="userPassword"></label>
-      <input type="text"
-        class="form-control" name="userPassword" id="userPassword" placeholder="Correo">
-      <label for="userPassword"></label>
-      <input type="password"
-          class="form-control" name="userPassword" id="userPassword" placeholder="Contraseña">
-      <label for="userPasswordConfirmation"></label>
-      <input type="password"
-          class="form-control" name="userPasswordConfirmation" id="userPasswordConfirmation" placeholder="Confirmar contraseña">
-    </div>
-  </div>
-  <div class="modal-footer align-self-center">
-    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Registrarme</button>
+    <form [formGroup]="profileForm">
+      <div class="form-group">
+        <input type="text"
+          class="form-control"
+          placeholder="Nombres"
+          formControlName="name"
+        >
+        <input type="text"
+          class="form-control"
+          placeholder="Correo"
+          formControlName="email"
+        >
+        <input type="password"
+          class="form-control"
+          placeholder="Contraseña"
+          formControlName="password"
+        >
+        <input type="password"
+          class="form-control"
+          placeholder="Confirmar contraseña"
+          formControlName="confirm_password"
+        >
+      </div>
+      <div class="modal-footer align-self-center">
+        <button type="submit"
+          class="btn btn-success"
+          [disabled]="!profileForm.valid"
+          (click)="registrarUsuario()"
+          (click)="modal.close('Save click')"
+        >
+          Registrarme
+        </button>
+      </div>
+    </form>
   </div>
 </ng-template>
