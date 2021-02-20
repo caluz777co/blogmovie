@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: "",
+  baseUrl: "http://100.24.185.188/api",
 
   //GET
   categorias: "/categorias",

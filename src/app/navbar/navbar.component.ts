@@ -41,7 +41,6 @@ export class NavbarComponent implements OnInit {
       })
       .catch((err)=>{
         this.infoSesion = null;
-        console.log(err);
       });
   }
 

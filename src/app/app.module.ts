@@ -15,6 +15,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { IntersectorService } from './services/intersector.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     NgxPaginationModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    BrowserAnimationsModule,
+    AvatarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: IntersectorService, multi: true },

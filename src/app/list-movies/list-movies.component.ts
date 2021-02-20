@@ -201,6 +201,9 @@ export class ListMoviesComponent implements OnInit {
           (res)=>{
             let series=[];
             let categories=[];
+            res.top.sort((a,b)=>{
+              return b.series - a.series;
+            });
             res.top.forEach(obj => {
               series.push(obj.series);
               categories.push(obj.categories);
