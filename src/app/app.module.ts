@@ -13,6 +13,8 @@ import { ListMoviesComponent } from './list-movies/list-movies.component';
 import { RankingComponent } from './list-movies/ranking/ranking.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { IntersectorService } from './services/intersector.service';
+import { CookieService } from 'ngx-cookie-service';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,12 @@ import { IntersectorService } from './services/intersector.service';
     HttpClientModule,
     NgxPaginationModule,
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgApexchartsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: IntersectorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: IntersectorService, multi: true },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,9 +13,9 @@ import { Sesion } from '../models/sesion.model';
 })
 export class NavbarComponent implements OnInit {
   closeResult = '';
-  usuario = new Usuario();
-  sesion = new Sesion();
-  infoSesion = [];
+  public usuario = new Usuario();
+  public sesion = new Sesion();
+  public infoSesion: any;
 
   profileForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -35,6 +35,14 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.verificarSesion()
+      .then((res)=>{
+        this.infoSesion = res;
+      })
+      .catch((err)=>{
+        this.infoSesion = null;
+        console.log(err);
+      });
   }
 
   openLogIn(content) {
@@ -55,15 +63,16 @@ export class NavbarComponent implements OnInit {
 
   public iniciarSesion(): Promise<any> {
     this.sesion =  this.sesionForm.value;
-    return new Promise((resolve) =>{
+    return new Promise((resolve, reject) =>{
       this.service.iniciarSesion(this.sesion)
       .subscribe(
         (res)=>{
-          console.log(res)
+          this.service.agregarToken(res.token);
+          this.ngOnInit();
           resolve(res);
         },
         (err) => {
-          console.log(err);
+          reject(err);
         }
       );
     })
@@ -75,7 +84,8 @@ export class NavbarComponent implements OnInit {
       this.service.registrarUsuario(this.usuario)
       .subscribe(
         (res)=>{
-          console.log(res)
+          this.service.agregarToken(res.token);
+          this.ngOnInit();
           resolve(res);
         },
         (err) => {
@@ -83,6 +93,25 @@ export class NavbarComponent implements OnInit {
         }
       );
     })
+  }
+
+  public verificarSesion(): Promise<any> {
+    return new Promise((resolve) =>{
+      this.service.obtenerUsuarioLogeado()
+      .subscribe(
+        (res)=>{
+          resolve(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    })
+  }
+
+  public cerrarSesion(): void {
+    this.service.liberarToken();
+    this.ngOnInit();
   }
 
   private getDismissReason(reason: any): string {

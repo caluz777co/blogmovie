@@ -19,7 +19,7 @@ export class GeneralService {
     return this.httpClient.post<any>(url, body, headers);
   }
 
-  public put(url: string, body: any, headers?): Observable<any> {
+  public put(url: string, body?: any, headers?): Observable<any> {
     return this.httpClient.put<any>(url, body, headers);
   }
 

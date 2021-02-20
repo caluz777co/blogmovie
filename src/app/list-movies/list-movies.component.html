@@ -1,40 +1,130 @@
-<div class="row">
-  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+<div class="container-fluid mt-5" style="background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);">
+  <div *ngIf="onHome">
     <div class="row">
-      <div class="col overflow-auto" style="height: 450px">
-        <div class="card-group">
-          <div class="card mr-3 mt-2 shadow" *ngFor="let pelicula of peliculas | paginate: { itemsPerPage: 3, currentPage: pageActual }">
-            <img class="card-img-top" src={{pelicula.url_image}} alt="movie-img" width="200" height="300">
-            <div class="card-body p-1 align-self-center text-center">
-              <button class="btn m-0">
-                <i class="fa fa-thumbs-o-up mr-1 text-primary" aria-hidden="true"></i>
-                <span class="badge badge-primary">{{pelicula.likes}}</span>
-              </button>
-              <h5 class="card-title text-center m-0">{{pelicula.title}}</h5>
-              <span class="card-title text-center p-0 m-0 text-secondary" style="font-size: 12px;">Director: {{pelicula.director}}</span><br>
-              <span class="card-title text-center p-0 m-0 text-secondary" style="font-size: 12px;">Año: {{pelicula.year}}</span>
-              <p class="card-text pl-3 pr-3 pt-1 pb-1 text-justify overflow-auto" style="font-size: 14px; height: 160px;">
-                {{pelicula.description}}
-              </p>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="card-group">
+              <div class="card mr-3 mt-2 shadow border-0"
+                  *ngFor="let pelicula of peliculas | paginate: { itemsPerPage: 3, currentPage: pageActual }"
+                  style="background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);">
+                <img class="card-img-top" src={{pelicula.url_image}} alt="movie-img" width="200" height="300">
+                <div class="card-body p-1 align-self-center text-center">
+                  <button class="btn m-0"
+                    (click)="anadirMeGusta(pelicula)">
+                    <i class="fa fa-thumbs-o-up mr-1 text-primary" aria-hidden="true"></i>
+                    <span class="badge badge-primary">{{pelicula.likes}}</span>
+                  </button>
+                  <h5 class="card-title text-center m-0">{{pelicula.title}}</h5>
+                  <span class="card-title text-center p-0 m-0 text-secondary" style="font-size: 12px;">Director: {{pelicula.director}}</span><br>
+                  <span class="card-title text-center p-0 m-0 text-secondary" style="font-size: 12px;">Año: {{pelicula.year}}</span>
+                  <p class="card-text pl-3 pr-3 pt-1 pb-1 text-justify overflow-auto" style="font-size: 14px; height: 160px;">
+                    {{pelicula.description}}
+                  </p>
+                </div>
+                <div class="card-footer"
+                  style="background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);">
+                  <button
+                    type="button"
+                    class="btn btn-primary w-100 border-0"
+                    (click)="verPelicula(pelicula)"
+                    style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
+                    Ver mas <i class="fa fa-eye ml-2" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="card-footer">
-              <button type="button" class="btn btn-outline-primary w-100">
-                Ver mas <i class="fa fa-eye ml-2" aria-hidden="true"></i>
-              </button>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div class="card border-0 mt-3">
+          <div class="card-header text-center text-white border-0 shadow"
+            style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
+            <h5 class="card-title">Top</h5>
+          </div>
+          <div class="card-body"
+            style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+            <div id="chart">
+              <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+              [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [plotOptions]="chartOptions.plotOptions"
+              [xaxis]="chartOptions.xaxis"></apx-chart>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 align-self-center text-center">
+    <div class="row mt-1" style="height: 50px;">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 align-self-center text-center fixed-bottom"
+        style="background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);">
         <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-    <app-ranking></app-ranking>
+  <div *ngIf="onPelicula">
+    <div class="container-fluid" style="margin-top: 165px;">
+      <div class="row">
+        <div class="col overflow-auto" style="height: 500px;">
+          <div class="card w-100 fixed-top" style="width: 100%;" *ngIf="peliculaSelecionada">
+            <button
+                class="btn btn-success border-0"
+                style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);"
+                (click)="regresar()">
+                Volver
+              </button>
+            <div class="card-body">
+              <h4 class="card-title">{{peliculaSelecionada.title}}</h4>
+              <span class="text-muted">{{peliculaSelecionada.director}} </span>
+              <button class="btn m-0">
+                <i class="fa fa-thumbs-o-up mr-1 text-primary h2" aria-hidden="true"></i>
+                <span class="badge badge-primary">{{peliculaSelecionada.likes}}</span>
+              </button>
+              <button
+                class="btn btn-success border-0"
+                style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);"
+                (click)="abrirInputComentario(contentComment)">
+                Añadir comentario
+              </button>
+            </div>
+          </div>
+          <div class="card mt-2 border-0 shadow" *ngFor="let comentario of comentarios">
+            <div class="card-header text-white" style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
+              <div class="align-self-end text-rigth">
+                {{comentario.fecha|date:'short'}}
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-muted">{{comentario.contenido}}</p>
+            </div>
+            <div class="card-footer">
+              {{comentario.nombre}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!--comentario-->
+<ng-template #contentComment let-modal>
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title text-light align-self-center text-center" id="modal-basic-title">AñadirComentario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formComentario">
+      <div class="form-group">
+        <input type="text"
+          class="form-control"
+          placeholder="Introduzca text aqui ..."
+          formControlName="comentario">
+      </div>
+      <button type="submit"
+        class="btn btn-success"
+        (click)="anadirComentario()"
+        (click)="modal.close('Save click')">
+        Enviar
+      </button>
+    </form>
+  </div>
 
+</ng-template>

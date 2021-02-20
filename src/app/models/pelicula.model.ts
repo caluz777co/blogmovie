@@ -5,7 +5,7 @@ export class Pelicula {
   title: string;
   url_image: string;
   id_categoria: number;
-  like: number;
+  likes: number;
   description: string;
   year: string;
   director: string;

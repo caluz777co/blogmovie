@@ -9,8 +9,15 @@ export const environment = {
   //GET
   categorias: "/categorias",
   peliculas: "/peliculas",
+  //POST
   registro: "/register",
-  login: "/login"
+  login: "/login",
+  perfil: "/profile",
+  comentario: "/comentarios",
+  agregarComentario: "/agregar-comentarios",
+  //PUT
+  masLike: "/megusta",
+  top: "/top"
 
 };
 

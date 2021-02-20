@@ -1,28 +1,41 @@
-<div class="row bg-dark">
-  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 align-self-center text-center">
+<div class="row fixed-top" style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 align-self-center text-center mt-2">
     <img src="../../assets/icons/cine.svg" alt="iconPage" width="50" height="50">
   </div>
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10 align-self-center text-center">
-    <p class="p-0 h1" style="font-family:Berkah;">Curiosity Movie</p>
+    <p class="p-0 h1 text-light" style="font-family:Berkah;">Curiosity Movie</p>
   </div>
   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 align-self-center text-center">
-    <button class="btn">
-      <i class="fa fa-film" aria-hidden="true"></i>
-      <span class="badge badge-danger">0</span>
-    </button>
+    <div *ngIf="infoSesion">
+      <button class="btn">
+        <i class="fa fa-film" aria-hidden="true"></i>
+        <span class="badge badge-danger">0</span>
+      </button>
+    </div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10 align-self-center text-center">
-    <button type="button" class="btn btn-outline-light border-0 mt-2 mb-2" (click)="openLogIn(contentLogIn)">
-      <i class="fa fa-user-circle" aria-hidden="true"></i>
-      Iniciar Sesión
-    </button>
+    <div *ngIf="!infoSesion">
+      <button type="button" class="btn btn-outline-light border-0 mt-2 mb-2" (click)="openLogIn(contentLogIn)">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        Iniciar Sesión
+      </button>
+    </div>
+    <div *ngIf="infoSesion" class="text-light">
+      {{infoSesion.user.email}}
+      <button type="button"
+        class="btn btn-sm ml-2"
+        style="background-image: linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%);"
+        (click)="cerrarSesion()">
+          <i class="fa fa-sign-out text-light" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
-
 </div>
 
 <!--Log in-->
 <ng-template #contentLogIn let-modal>
-  <div class="modal-header bg-dark">
+  <div class="modal-header"
+    style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
     <h4 class="modal-title text-light align-self-center text-center" id="modal-basic-title">Iniciar Sesión</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -54,7 +67,8 @@
 
 <!--Sign Up-->
 <ng-template #contentSignUp let-modal>
-  <div class="modal-header bg-dark">
+  <div class="modal-header"
+    style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
     <h4 class="modal-title text-light align-self-center text-center" id="modal-basic-title">Registrarme</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
